@@ -51,6 +51,9 @@ jobs:
           distribution: zulu
           java-version: 8
       - run: java -version
+      - run: |
+          git submodule init
+          git submodule update ${{ matrix.submodule }}
       - name: Restore the compiled libraries
         uses: actions/cache@v2
         id: mvn-cache
@@ -58,8 +61,10 @@ jobs:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-unified-${{ github.run_id }}
       - run: |
-          ls -alt
-      - run: |
           ls -alt ~/.m2/repository/com/google/cloud/google-cloud-core/ ~/.m2/repository/com/google/cloud/
       - run: |
-          mvn test --file ${{matrix.submodule}}
+          ls -alt
+      - run: |
+          ls -alt ${{ matrix.submodule }}
+      - run: |
+          mvn test --file ${{ matrix.submodule }}
