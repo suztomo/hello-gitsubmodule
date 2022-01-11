@@ -20,5 +20,21 @@ jobs:
     - run: |
         git submodule init
         git submodule update
-        ls java-shared-dependencies
+    - name: Run tests in the repositories for the shared dependencies
+      run: |
+        mvn test --file google-auth-library-java
+        mvn test --file java-core
+  units:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        submodule:
+          - java-accessapproval
+          - java-iam-admin
+          - java-iamcredentials
+          - java-bigquery
+    needs: checkout-env
+    steps:
+      - run: |
+          mvn test --file ${{matrix.submodule}}
 
