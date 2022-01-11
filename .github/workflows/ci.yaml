@@ -1,0 +1,23 @@
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+name: ci
+jobs:
+  checkout-env:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: stCarolas/setup-maven@v4
+      with:
+        maven-version: 3.8.1
+    - uses: actions/setup-java@v2
+      with:
+        distribution: zulu
+        java-version: ${{matrix.java}}
+    - run: java -version
+    - run: |
+      git submodule init
+      git submodule update
+      ls java-shared-dependencies
