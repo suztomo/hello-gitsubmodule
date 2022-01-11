@@ -24,17 +24,26 @@ jobs:
       run: |
         mvn test --file google-auth-library-java
         mvn test --file java-core
+  units-java-iam-admin:
+    needs: checkout-env
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          ls -alt
+      - run: |
+          mvn test --file java-iam-admin
   units:
+    needs: checkout-env
     runs-on: ubuntu-latest
     strategy:
       matrix:
         submodule:
           - java-accessapproval
-          - java-iam-admin
           - java-iamcredentials
           - java-bigquery
-    needs: checkout-env
     steps:
+      - run: |
+          ls -alt
       - run: |
           mvn test --file ${{matrix.submodule}}
 
