@@ -4,3 +4,9 @@
 [submodule "google-auth-library-java"]
 	path = google-auth-library-java
 	url = https://github.com/googleapis/google-auth-library-java
+[submodule "java-core"]
+	path = java-core
+	url = https://github.com/googleapis/java-core
+[submodule "java-accessapproval"]
+	path = java-accessapproval
+	url = https://github.com/googleapis/java-accessapproval
