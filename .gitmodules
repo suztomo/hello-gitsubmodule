@@ -10,3 +10,15 @@
 [submodule "java-accessapproval"]
 	path = java-accessapproval
 	url = https://github.com/googleapis/java-accessapproval
+[submodule "java-bigquery"]
+	path = java-bigquery
+	url = https://github.com/googleapis/java-bigquery
+	branch = 2.3.x
+[submodule "java-iam-admin"]
+	path = java-iam-admin
+	url = https://github.com/googleapis/java-iam-admin
+	branch = 1.0.x
+[submodule "java-iamcredentials"]
+	path = java-iamcredentials
+	url = https://github.com/googleapis/java-iamcredentials
+	branch = v2.0.6
