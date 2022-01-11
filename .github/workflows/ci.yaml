@@ -15,9 +15,56 @@ jobs:
     - uses: actions/setup-java@v2
       with:
         distribution: zulu
-        java-version: ${{matrix.java}}
+        java-version: 8
     - run: java -version
     - run: |
-      git submodule init
-      git submodule update
-      ls java-shared-dependencies
+        git submodule init
+        git submodule update
+    - name: Run tests in the repositories for the shared dependencies
+      run: |
+        FLAGS="--batch-mode --no-transfer-progress -DskipTests=true -Dclirr.skip=true -Denforcer.skip=true -Dmaven.javadoc.skip=true"
+        mvn install --file google-auth-library-java $FLAGS
+        mvn install --file java-core $FLAGS
+    - name: Save compiled libraries into cache to share subsequent jobs
+      uses: actions/cache@v2
+      id: mvn-cache
+      with:
+        path: ~/.m2/repository
+        # This cache is only hit by the subsequent job within the same run
+        key: ${{ runner.os }}-maven-unified-${{ github.run_id }}
+  units:
+    needs: checkout-env
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        submodule:
+          - java-accessapproval
+          - java-iamcredentials
+          - java-bigquery
+    steps:
+      - uses: actions/checkout@v2
+      - uses: stCarolas/setup-maven@v4
+        with:
+          maven-version: 3.8.1
+      - uses: actions/setup-java@v2
+        with:
+          distribution: zulu
+          java-version: 8
+      - run: java -version
+      - run: |
+          git submodule init
+          git submodule update ${{ matrix.submodule }}
+      - name: Restore the compiled libraries
+        uses: actions/cache@v2
+        id: mvn-cache
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-unified-${{ github.run_id }}
+      - run: |
+          ls -alt ~/.m2/repository/com/google/cloud/google-cloud-core/ ~/.m2/repository/com/google/cloud/
+      - run: |
+          ls -alt
+      - run: |
+          ls -alt ${{ matrix.submodule }}
+      - run: |
+          mvn test --file ${{ matrix.submodule }}
