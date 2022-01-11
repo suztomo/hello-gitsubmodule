@@ -1,0 +1,6 @@
+[submodule "java-shared-dependencies"]
+	path = java-shared-dependencies
+	url = https://github.com/googleapis/java-shared-dependencies
+[submodule "google-auth-library-java"]
+	path = google-auth-library-java
+	url = https://github.com/googleapis/google-auth-library-java
