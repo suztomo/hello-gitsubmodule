@@ -18,6 +18,7 @@ jobs:
         java-version: ${{matrix.java}}
     - run: java -version
     - run: |
-      git submodule init
-      git submodule update
-      ls java-shared-dependencies
+        git submodule init
+        git submodule update
+        ls java-shared-dependencies
+
