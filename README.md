@@ -17,8 +17,10 @@ the following:
 | java-iam-admin  | v1.0.0 (48424a4) |
 | java-iamcredentials  | v2.0.6 (12e1ff5) |
 | java-bigquery  | v2.3.3 (f88665b) |
-
+    
 # CI
 
 Creating a pull request runs CI to run the tests in the submodules.
 
+An example to validate an incompatible change in java-core:
+https://github.com/suztomo/hello-gitsubmodule/pull/2
