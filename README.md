@@ -17,7 +17,14 @@ the following:
 | java-iam-admin  | v1.0.0 (48424a4) |
 | java-iamcredentials  | v2.0.6 (12e1ff5) |
 | java-bigquery  | v2.3.3 (f88665b) |
-    
+
+(I omit many other repositories for the sake of simplicity.)
+
+A tag in this repository track these repository release tags. For example:
+`2022-01-sdk` (https://github.com/suztomo/hello-gitsubmodule/releases/tag/2022-01-sdk)
+represents the January 2022 SDK release, and `2022-06-sdk`, when it's created,
+will have different set of release tags of the libraries.
+
 # CI
 
 Creating a pull request runs CI to run the tests in the submodules.
