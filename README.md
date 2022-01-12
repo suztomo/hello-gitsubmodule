@@ -9,7 +9,7 @@ that corresponds to the release tag of the SDK release.
 For example for January 2022 SDK release the references of the submodules are
 the following:
 
-| Repository  | Tag |
+| Repository  | Tag (commit) |
 | ------------- | ------------- |
 | google-auth-library-java  | v1.2.1 (4ae533b) |
 | java-core  | v2.2.0 (834d228) |
